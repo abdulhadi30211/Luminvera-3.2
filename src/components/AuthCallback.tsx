@@ -9,8 +9,9 @@ const AuthCallback: React.FC = () => {
   useEffect(() => {
     const handleAuthCallback = async () => {
       try {
-        // ✅ Exchange the auth code from URL for a session
-        const { data, error: authError } = await supabase.auth.exchangeCodeForSession();
+        // ✅ Pass current URL to exchangeCodeForSession
+        const url = window.location.href;
+        const { data, error: authError } = await supabase.auth.exchangeCodeForSession({ url });
         if (authError) throw authError;
 
         const user = data.session?.user;
