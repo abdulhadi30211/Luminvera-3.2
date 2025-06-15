@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import CategoryGrid from './components/CategoryGrid';
-import DealsSection from './components/DealsSection';
+import ProductGrid from './components/ProductGrid';
 import SearchResults from './components/SearchResults';
 import Footer from './components/Footer';
 import AuthModal from './components/AuthModal';
@@ -19,7 +19,7 @@ function HomePage() {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
 
-  const { products, searchProducts, fetchProducts } = useProducts();
+  const { products, searchProducts, fetchProducts, loading } = useProducts();
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
@@ -44,12 +44,21 @@ function HomePage() {
       />
       
       {searchQuery ? (
-        <SearchResults results={products} query={searchQuery} />
+        <SearchResults 
+          results={products} 
+          query={searchQuery} 
+          onAuthRequired={handleAuthRequired}
+        />
       ) : (
         <>
           <HeroSection />
           <CategoryGrid />
-          <DealsSection />
+          <ProductGrid 
+            products={products.slice(0, 8)} 
+            loading={loading}
+            title="Featured Products"
+            onAuthRequired={handleAuthRequired}
+          />
         </>
       )}
       

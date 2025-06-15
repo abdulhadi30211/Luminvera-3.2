@@ -16,6 +16,7 @@ export interface Database {
           product_id: string
           quantity: number
           created_at: string
+          updated_at: string
         }
         Insert: {
           id?: string
@@ -23,6 +24,7 @@ export interface Database {
           product_id: string
           quantity: number
           created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
@@ -30,6 +32,7 @@ export interface Database {
           product_id?: string
           quantity?: number
           created_at?: string
+          updated_at?: string
         }
       }
       categories: {
@@ -134,24 +137,24 @@ export interface Database {
           updated_at?: string | null
         }
       }
-      users: {
+      wishlist_items: {
         Row: {
           id: string
-          email: string | null
-          full_name: string | null
-          role: string | null
+          user_id: string
+          product_id: string
+          created_at: string
         }
         Insert: {
-          id: string
-          email?: string | null
-          full_name?: string | null
-          role?: string | null
+          id?: string
+          user_id: string
+          product_id: string
+          created_at?: string
         }
         Update: {
           id?: string
-          email?: string | null
-          full_name?: string | null
-          role?: string | null
+          user_id?: string
+          product_id?: string
+          created_at?: string
         }
       }
     }
